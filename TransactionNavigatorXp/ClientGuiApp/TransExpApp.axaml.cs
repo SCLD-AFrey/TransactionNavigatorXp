@@ -1,6 +1,8 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using ClientGuiApp.Services.Database;
+using ClientGuiApp.Services.Infrastructure;
 using ClientGuiApp.ViewModels;
 using ClientGuiApp.ViewModels.MainApplication;
 using ClientGuiApp.Views;
@@ -12,11 +14,11 @@ using Serilog;
 
 namespace ClientGuiApp;
 
-public partial class App : Application
+public partial class TransExpApp : Application
 {
     public readonly IHost m_appHost;
     public static int CurrentUserId { get; set; } = 1;
-    public App()
+    public TransExpApp()
     {
         m_appHost = Host.CreateDefaultBuilder()
             .ConfigureLogging(p_options =>
@@ -28,6 +30,12 @@ public partial class App : Application
     }
     private void ConfigureServices(IServiceCollection p_services)
     {
+        p_services.AddSingleton<CommonDirectories>();
+        p_services.AddSingleton<CommonFiles>();
+        p_services.AddSingleton<DatabaseUtilities>();
+        
+        p_services.AddSingleton<TransactionDatabaseInterface>();
+        p_services.AddSingleton<TransactionDatabaseInitialization>();
 
         p_services.AddSingleton<MainWindowView>();
         p_services.AddSingleton<MainWindowViewModel>();

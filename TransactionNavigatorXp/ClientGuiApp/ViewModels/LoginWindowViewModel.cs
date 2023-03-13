@@ -21,7 +21,7 @@ public class LoginWindowViewModel : ViewModelBase
     [Reactive] public string LoginMessage { get; set; } = string.Empty;
     private Task Login()
     {
-        App.CurrentUserId = 1;
+        TransExpApp.CurrentUserId = 1;
         return Task.CompletedTask;
     }
 }
