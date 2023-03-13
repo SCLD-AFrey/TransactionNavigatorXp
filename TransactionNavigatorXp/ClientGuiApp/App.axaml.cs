@@ -15,7 +15,7 @@ namespace ClientGuiApp;
 public partial class App : Application
 {
     public readonly IHost m_appHost;
-    public static int CurrentUserId { get; set; } = 0;
+    public static int CurrentUserId { get; set; } = 1;
     public App()
     {
         m_appHost = Host.CreateDefaultBuilder()
@@ -37,9 +37,6 @@ public partial class App : Application
 
         p_services.AddSingleton<AccountsView>();
         p_services.AddSingleton<AccountsViewModel>();
-
-        p_services.AddSingleton<LoginView>();
-        p_services.AddSingleton<LoginViewModel>();
 
         p_services.AddSingleton<MainView>();
         p_services.AddSingleton<MainViewModel>();
